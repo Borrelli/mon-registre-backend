@@ -14,36 +14,4 @@ export class Revenue {
   get uid() {
     return this._uid;
   }
-
-  get date() {
-    return this._date;
-  }
-
-  get reference() {
-    return this.revenueProps.reference;
-  }
-
-  get customerName() {
-    return this.revenueProps.customerName;
-  }
-
-  get customerId() {
-    return this.revenueProps.customerId;
-  }
-
-  get amountExcludingTax() {
-    return this.revenueProps.amountExcludingTax;
-  }
-
-  get amountIncludingTax() {
-    return this.revenueProps.amountIncludingTax;
-  }
-
-  get amountVAT() {
-    return this.revenueProps.amountVAT;
-  }
-
-  get paiementMethod() {
-    return this.revenueProps.paiementMethod;
-  }
 }
