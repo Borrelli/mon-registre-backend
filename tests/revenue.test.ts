@@ -5,6 +5,7 @@ import InMemoryUniqueIdentifierService from "../src/adapters/services/in-memory/
 import { FindRevenue } from "../src/domains/use-cases/find-revenue.use-case";
 import InMemoryDateService from "../src/adapters/services/in-memory/date.in-memory.service";
 import { IRevenueProps } from "../src/domains/entities/revenue.entity";
+import { RemoveRevenue } from "../src/domains/use-cases/remove-revenue.use-case";
 
 describe("Revenue", () => {
   let revenueRepository: IRevenueRepository;
@@ -52,6 +53,20 @@ describe("Revenue", () => {
       const findRevenueResponse = await new FindRevenue(revenueRepository).byId(revenueId);
 
       expect(findRevenueResponse.uid).toEqual("uid2");
+    });
+  });
+
+  describe("Remove", () => {
+    beforeEach(() => {
+      revenueRepository = new RevenueInMemoryRepository();
+    });
+
+    it("should be able to remove a revenue", async () => {
+      const revenueId = "uid2";
+
+      const removeRevenueResponse = await new RemoveRevenue(revenueRepository).execute(revenueId);
+
+      expect(removeRevenueResponse.length).toEqual(1);
     });
   });
 });

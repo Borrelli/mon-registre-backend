@@ -41,4 +41,12 @@ export class RevenueInMemoryRepository implements IRevenueRepository {
       resolve(this.revenueList.find((revenue) => revenue.uid === id));
     });
   }
+
+  public removeById(id: string): Promise<Revenue[]> {
+    return new Promise((resolve, reject) => {
+      const index = this.revenueList.findIndex((revenue) => revenue.uid === id);
+      this.revenueList.splice(index, 1);
+      resolve(this.revenueList);
+    });
+  }
 }
