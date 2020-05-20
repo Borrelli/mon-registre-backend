@@ -12,6 +12,10 @@
   ],
   "author": "Nicolas TARABORRELLI",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Borrelli/mon-registre-backend.git"
+  },
   "devDependencies": {
     "@types/jest": "^25.2.3",
     "@typescript-eslint/eslint-plugin": "^2.34.0",
