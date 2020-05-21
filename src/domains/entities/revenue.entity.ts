@@ -1,7 +1,7 @@
 export interface IRevenueProps {
   reference: string;
   customerName: string;
-  customerId: string;
+  userId: string;
   amountExcludingTax: number;
   amountIncludingTax: number;
   amountVAT: number;
@@ -13,5 +13,9 @@ export class Revenue {
 
   get uid() {
     return this._uid;
+  }
+
+  get userId() {
+    return this.revenueProps.userId;
   }
 }

@@ -1,11 +1,11 @@
-import { CreateRevenue } from "../src/domains/use-cases/create-revenue.use-case";
+import { CreateRevenue } from "../src/domains/use-cases/revenue/create-revenue.use-case";
 import { IRevenueRepository } from "../src/domains/ports/repositories/revenue.repository";
 import { RevenueInMemoryRepository } from "../src/adapters/repositories/in-memory/revenue.in-memory.repository";
 import InMemoryUniqueIdentifierService from "../src/adapters/services/in-memory/unique-identifier.in-memory.service";
-import { FindRevenue } from "../src/domains/use-cases/find-revenue.use-case";
+import { FindRevenue } from "../src/domains/use-cases/revenue/find-revenue.use-case";
 import InMemoryDateService from "../src/adapters/services/in-memory/date.in-memory.service";
 import { IRevenueProps } from "../src/domains/entities/revenue.entity";
-import { RemoveRevenue } from "../src/domains/use-cases/remove-revenue.use-case";
+import { RemoveRevenue } from "../src/domains/use-cases/revenue/remove-revenue.use-case";
 
 describe("Revenue", () => {
   let revenueRepository: IRevenueRepository;
@@ -24,7 +24,7 @@ describe("Revenue", () => {
         amountExcludingTax: 40,
         amountIncludingTax: 45,
         amountVAT: 5,
-        customerId: "customer-id1",
+        userId: "user-id1",
         customerName: " customer-name1",
         paiementMethod: "Card",
         reference: "paiement-ref1",
@@ -32,7 +32,7 @@ describe("Revenue", () => {
 
       const createRevenueResponse = await new CreateRevenue(revenueRepository, revenueId, revenueDate).execute(revenue);
 
-      expect(createRevenueResponse.length).toEqual(3);
+      expect(createRevenueResponse).toEqual("ok");
     });
   });
 
@@ -42,7 +42,9 @@ describe("Revenue", () => {
     });
 
     it("should be able to find all revenues", async () => {
-      const findRevenueResponse = await new FindRevenue(revenueRepository).all();
+      const userId = "uid1";
+
+      const findRevenueResponse = await new FindRevenue(revenueRepository).all(userId);
 
       expect(findRevenueResponse.length).toEqual(2);
     });
@@ -66,7 +68,16 @@ describe("Revenue", () => {
 
       const removeRevenueResponse = await new RemoveRevenue(revenueRepository).execute(revenueId);
 
-      expect(removeRevenueResponse.length).toEqual(1);
+      expect(removeRevenueResponse).toEqual("ok");
+    });
+
+    it("should catch ko if revenue is not founded", async () => {
+      const revenueId = "uid10";
+      try {
+        await new RemoveRevenue(revenueRepository).execute(revenueId);
+      } catch (err) {
+        expect(err).toEqual("ko");
+      }
     });
   });
 });

@@ -7,7 +7,7 @@ export class RevenueInMemoryRepository implements IRevenueRepository {
       amountExcludingTax: 30,
       amountIncludingTax: 35,
       amountVAT: 5,
-      customerId: "customer-id2",
+      userId: "uid1",
       customerName: " customer-name2",
       paiementMethod: "Card",
       reference: "paiement-ref2",
@@ -16,23 +16,32 @@ export class RevenueInMemoryRepository implements IRevenueRepository {
       amountExcludingTax: 30,
       amountIncludingTax: 35,
       amountVAT: 5,
-      customerId: "customer-id3",
+      userId: "uid1",
+      customerName: " customer-name3",
+      paiementMethod: "Card",
+      reference: "paiement-ref3",
+    }),
+    new Revenue("uid3", new Date("2000-01-03"), {
+      amountExcludingTax: 30,
+      amountIncludingTax: 35,
+      amountVAT: 5,
+      userId: "uid2",
       customerName: " customer-name3",
       paiementMethod: "Card",
       reference: "paiement-ref3",
     }),
   ];
 
-  public create(revenue: Revenue): Promise<Revenue[]> {
+  public create(revenue: Revenue): Promise<"ok" | "ko"> {
     return new Promise((resolve, reject) => {
       this.revenueList.push(revenue);
-      resolve(this.revenueList);
+      resolve("ok");
     });
   }
 
-  public findAll(): Promise<Revenue[]> {
+  public findAll(userId: string): Promise<Revenue[]> {
     return new Promise((resolve, reject) => {
-      resolve(this.revenueList);
+      resolve(this.revenueList.filter((revenue) => revenue.userId === userId));
     });
   }
 
@@ -42,11 +51,14 @@ export class RevenueInMemoryRepository implements IRevenueRepository {
     });
   }
 
-  public removeById(id: string): Promise<Revenue[]> {
+  public removeById(id: string): Promise<"ok" | "ko"> {
     return new Promise((resolve, reject) => {
       const index = this.revenueList.findIndex((revenue) => revenue.uid === id);
+      if (index === -1) {
+        reject("ko");
+      }
       this.revenueList.splice(index, 1);
-      resolve(this.revenueList);
+      resolve("ok");
     });
   }
 }
