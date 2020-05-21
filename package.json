@@ -4,7 +4,12 @@
   "description": "gère le registre de ton entreprise",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "test-w": "jest --watch",
+    "test-cov": "jest --coverage",
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "start": "nodemon ./build/src/index.js"
   },
   "keywords": [
     "registre",
@@ -37,7 +42,7 @@
       }
     },
     "transform": {
-      ".ts": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+      ".ts": "ts-jest"
     },
     "testEnvironment": "node",
     "moduleFileExtensions": [
@@ -52,6 +57,7 @@
     "@typescript-eslint/parser": "^2.34.0",
     "eslint": "^7.0.0",
     "jest": "^26.0.1",
+    "nodemon": "^2.0.4",
     "ts-jest": "^26.0.0",
     "typescript": "^3.9.3"
   }
