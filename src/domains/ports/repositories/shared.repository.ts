@@ -1,3 +1,3 @@
 export interface ISharedRepository<T> {
-  create(item: T): Promise<any>;
+  create(t: T): Promise<any>;
 }
