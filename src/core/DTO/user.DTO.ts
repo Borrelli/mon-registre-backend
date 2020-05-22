@@ -5,3 +5,9 @@ export interface IUserRepositoryDTO {
   lastname: string;
   email: string;
 }
+
+export interface IUserEntityDTO {
+  firstname: string;
+  lastname: string;
+  email: string;
+}

@@ -2,9 +2,9 @@ import { IUserRepository } from "../../src/core/ports/repositories/user.reposito
 import { UserInMemoryRepository } from "../../src/adapters/secondary/repositories/in-memory/user.in-memory.repository";
 import InMemoryUniqueIdentifierService from "../../src/adapters/secondary/services/in-memory/unique-identifier.in-memory.service";
 import InMemoryDateService from "../../src/adapters/secondary/services/in-memory/date.in-memory.service";
-import { IUserProps } from "../../src/core/entities/user.entity";
 import { CreateUser } from "../../src/core/use-cases/user/create-user.use-case";
 import { RemoveUser } from "../../src/core/use-cases/user/remove-user.use-case";
+import { IUserEntityDTO } from "../../src/core/DTO/user.DTO";
 
 describe("User", () => {
   let userRepository: IUserRepository;
@@ -19,7 +19,7 @@ describe("User", () => {
     });
 
     it("should be able to create a user", async () => {
-      const user: IUserProps = {
+      const user: IUserEntityDTO = {
         email: "email@user.test1",
         firstname: "firstname1",
         lastname: "lastname1",

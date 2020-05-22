@@ -1,21 +1,33 @@
-export interface IRevenueProps {
-  reference: string;
-  customerName: string;
-  userId: string;
-  amountExcludingTax: number;
-  amountIncludingTax: number;
-  amountVAT: number;
-  paiementMethod: string;
-}
+import { IRevenueEntityDTO } from "../DTO/revenue.DTO";
 
 export class Revenue {
-  constructor(private _uid: string, private _date: Date, private revenueProps: IRevenueProps) {}
+  constructor(private _uid: string, private _creationDate: Date, private _revenueProps: IRevenueEntityDTO) {}
 
   get uid() {
     return this._uid;
   }
-
+  get creationDate() {
+    return this._creationDate;
+  }
+  get reference() {
+    return this._revenueProps.reference;
+  }
+  get customerName() {
+    return this._revenueProps.customerName;
+  }
   get userId() {
-    return this.revenueProps.userId;
+    return this._revenueProps.userId;
+  }
+  get amountExcludingTax() {
+    return this._revenueProps.amountExcludingTax;
+  }
+  get amountIncludingTax() {
+    return this._revenueProps.amountIncludingTax;
+  }
+  get amountVAT() {
+    return this._revenueProps.amountVAT;
+  }
+  get paiementMethod() {
+    return this._revenueProps.paiementMethod;
   }
 }

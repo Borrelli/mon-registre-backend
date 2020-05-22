@@ -4,8 +4,8 @@ import { RevenueInMemoryRepository } from "../../src/adapters/secondary/reposito
 import InMemoryUniqueIdentifierService from "../../src/adapters/secondary/services/in-memory/unique-identifier.in-memory.service";
 import { FindRevenue } from "../../src/core/use-cases/revenue/find-revenue.use-case";
 import InMemoryDateService from "../../src/adapters/secondary/services/in-memory/date.in-memory.service";
-import { IRevenueProps } from "../../src/core/entities/revenue.entity";
 import { RemoveRevenue } from "../../src/core/use-cases/revenue/remove-revenue.use-case";
+import { IRevenueEntityDTO } from "../../src/core/DTO/revenue.DTO";
 
 describe("Revenue", () => {
   let revenueRepository: IRevenueRepository;
@@ -20,7 +20,7 @@ describe("Revenue", () => {
     });
 
     it("should be able to create a revenue", async () => {
-      const revenue: IRevenueProps = {
+      const revenue: IRevenueEntityDTO = {
         amountExcludingTax: 40,
         amountIncludingTax: 45,
         amountVAT: 5,
