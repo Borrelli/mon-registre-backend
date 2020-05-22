@@ -9,7 +9,7 @@
     "test-cov": "jest --coverage",
     "build": "tsc",
     "watch": "tsc --watch",
-    "start": "nodemon ./build/src/index.js"
+    "serve": "nodemon ./build/src/index.js"
   },
   "keywords": [
     "registre",
@@ -57,6 +57,7 @@
     "@types/express": "^4.17.6",
     "@types/jest": "^25.2.3",
     "@types/mongoose": "^5.7.21",
+    "@types/uuid": "^8.0.0",
     "@typescript-eslint/eslint-plugin": "^2.34.0",
     "@typescript-eslint/parser": "^2.34.0",
     "eslint": "^7.0.0",
@@ -68,6 +69,7 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
-    "mongoose": "^5.9.15"
+    "mongoose": "^5.9.15",
+    "uuid": "^8.1.0"
   }
 }
