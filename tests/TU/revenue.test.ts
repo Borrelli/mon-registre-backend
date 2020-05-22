@@ -77,6 +77,7 @@ describe("Revenue", () => {
       const revenueId = "uid10";
       try {
         await new RemoveRevenue(revenueRepository).execute(revenueId);
+        fail("test failed");
       } catch (err) {
         expect(err).toEqual("ko");
       }

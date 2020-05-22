@@ -18,7 +18,7 @@ describe("User", () => {
       userDate = new InMemoryDateService().generate();
     });
 
-    it("should be able to create a user", async () => {
+    it("should create a user", async () => {
       const user: IUserEntityDTO = {
         email: "email@user.test1",
         firstname: "firstname1",
@@ -29,6 +29,21 @@ describe("User", () => {
 
       expect(createUserResponse).toEqual("ok");
     });
+
+    it("should return error if user email alrealy exist", async () => {
+      const user: IUserEntityDTO = {
+        email: "email@user.test2",
+        firstname: "firstname1",
+        lastname: "lastname1",
+      };
+
+      try {
+        await new CreateUser(userRepository, userId, userDate).execute(user);
+        fail("test failed");
+      } catch (err) {
+        expect(err).toEqual("ko");
+      }
+    });
   });
 
   describe("Remove", () => {
@@ -36,7 +51,7 @@ describe("User", () => {
       userRepository = new UserInMemoryRepository();
     });
 
-    it("should be able to remove a user", async () => {
+    it("should remove a user", async () => {
       const userId = "uid2";
 
       const removeUserResponse = await new RemoveUser(userRepository).execute(userId);
@@ -48,6 +63,7 @@ describe("User", () => {
       const userId = "uid10";
       try {
         await new RemoveUser(userRepository).execute(userId);
+        fail("test failed");
       } catch (err) {
         expect(err).toEqual("ko");
       }

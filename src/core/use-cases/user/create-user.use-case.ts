@@ -6,8 +6,9 @@ import { IUserEntityDTO } from "../../DTO/user.DTO";
 export class CreateUser {
   constructor(private repository: IUserRepository, private userId: string, private userDate: Date) {}
 
-  public execute(userProps: IUserEntityDTO) {
+  public async execute(userProps: IUserEntityDTO) {
     const user = new User(this.userId, this.userDate, userProps);
+    await this.repository.exist(user.email);
     return this.repository.create(UserMapper.toRepository(user));
   }
 }

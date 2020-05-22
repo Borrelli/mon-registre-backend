@@ -4,10 +4,23 @@ import { IUserRepositoryDTO } from "../../../../core/DTO/user.DTO";
 import { UserSchema } from "./models/user.models.real.repository";
 
 export class UserRealRepository implements IUserRepository {
-  removeById(id: string): Promise<any> {
+  public removeById(id: string): Promise<any> {
     return UserModel.findByIdAndDelete({ uid: id }).exec();
   }
-  create(user: IUserRepositoryDTO): Promise<UserSchema> {
+  public create(user: IUserRepositoryDTO): Promise<UserSchema> {
     return new UserModel(user).save();
+  }
+  public exist(email: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      UserModel.findOne({ email })
+        .exec()
+        .then((user) => {
+          if (user) {
+            return reject(new Error("user exist"));
+          }
+          return resolve();
+        })
+        .catch((err) => reject(err));
+    });
   }
 }

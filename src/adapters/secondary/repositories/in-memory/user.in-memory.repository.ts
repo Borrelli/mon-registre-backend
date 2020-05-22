@@ -24,7 +24,7 @@ export class UserInMemoryRepository implements IUserRepository {
   public create(user: IUserRepositoryDTO): Promise<"ok" | "ko"> {
     return new Promise((resolve, reject) => {
       this.userList.push(user);
-      resolve("ok");
+      return resolve("ok");
     });
   }
 
@@ -32,10 +32,20 @@ export class UserInMemoryRepository implements IUserRepository {
     return new Promise((resolve, reject) => {
       const index = this.userList.findIndex((user) => user.uid === id);
       if (index === -1) {
-        reject("ko");
+        return reject("ko");
       }
       this.userList.splice(index, 1);
-      resolve("ok");
+      return resolve("ok");
+    });
+  }
+
+  public exist(email: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      const foundedUser = this.userList.find((user) => user.email === email);
+      if (foundedUser) {
+        return reject("ko");
+      }
+      return resolve();
     });
   }
 }
