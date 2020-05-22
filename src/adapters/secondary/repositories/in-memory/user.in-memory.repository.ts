@@ -1,5 +1,5 @@
-import { IUserRepository } from "../../../domains/ports/repositories/user.repository";
-import { User } from "../../../domains/entities/user.entity";
+import { IUserRepository } from "../../../../core/ports/repositories/user.repository";
+import { User } from "../../../../core/entities/user.entity";
 
 export class UserInMemoryRepository implements IUserRepository {
   private userList: User[] = [

@@ -1,5 +1,5 @@
-import { IRevenueRepository } from "../../../domains/ports/repositories/revenue.repository";
-import { Revenue } from "../../../domains/entities/revenue.entity";
+import { IRevenueRepository } from "../../../../core/ports/repositories/revenue.repository";
+import { Revenue } from "../../../../core/entities/revenue.entity";
 
 export class RevenueInMemoryRepository implements IRevenueRepository {
   private revenueList: Revenue[] = [
