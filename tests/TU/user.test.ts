@@ -1,10 +1,10 @@
-import { IUserRepository } from "../src/core/ports/repositories/user.repository";
-import { UserInMemoryRepository } from "../src/adapters/secondary/repositories/in-memory/user.in-memory.repository";
-import InMemoryUniqueIdentifierService from "../src/adapters/secondary/services/in-memory/unique-identifier.in-memory.service";
-import InMemoryDateService from "../src/adapters/secondary/services/in-memory/date.in-memory.service";
-import { IUserProps } from "../src/core/entities/user.entity";
-import { CreateUser } from "../src/core/use-cases/user/create-user.use-case";
-import { RemoveUser } from "../src/core/use-cases/user/remove-user.use-case";
+import { IUserRepository } from "../../src/core/ports/repositories/user.repository";
+import { UserInMemoryRepository } from "../../src/adapters/secondary/repositories/in-memory/user.in-memory.repository";
+import InMemoryUniqueIdentifierService from "../../src/adapters/secondary/services/in-memory/unique-identifier.in-memory.service";
+import InMemoryDateService from "../../src/adapters/secondary/services/in-memory/date.in-memory.service";
+import { IUserProps } from "../../src/core/entities/user.entity";
+import { CreateUser } from "../../src/core/use-cases/user/create-user.use-case";
+import { RemoveUser } from "../../src/core/use-cases/user/remove-user.use-case";
 
 describe("User", () => {
   let userRepository: IUserRepository;

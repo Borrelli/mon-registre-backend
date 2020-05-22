@@ -49,7 +49,8 @@
       "ts",
       "js",
       "json"
-    ]
+    ],
+    "testRegex": "(/tests/.*|(\\.|/)(test))\\.[t]sx?$"
   },
   "devDependencies": {
     "@types/body-parser": "^1.19.0",

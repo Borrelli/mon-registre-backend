@@ -10,7 +10,7 @@ export class RevenueRealRepository implements IRevenueRepository {
     return RevenueModel.findOne({ uid: id }).exec();
   }
   removeById(id: string): Promise<any> {
-    return RevenueModel.findByIdAndDelete({ uid: id }).exec();
+    return RevenueModel.findOneAndDelete({ uid: id }).exec();
   }
   create(revenue: Revenue): Promise<any> {
     return new RevenueModel(revenue).save();

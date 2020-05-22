@@ -1,11 +1,11 @@
-import { CreateRevenue } from "../src/core/use-cases/revenue/create-revenue.use-case";
-import { IRevenueRepository } from "../src/core/ports/repositories/revenue.repository";
-import { RevenueInMemoryRepository } from "../src/adapters/secondary/repositories/in-memory/revenue.in-memory.repository";
-import InMemoryUniqueIdentifierService from "../src/adapters/secondary/services/in-memory/unique-identifier.in-memory.service";
-import { FindRevenue } from "../src/core/use-cases/revenue/find-revenue.use-case";
-import InMemoryDateService from "../src/adapters/secondary/services/in-memory/date.in-memory.service";
-import { IRevenueProps } from "../src/core/entities/revenue.entity";
-import { RemoveRevenue } from "../src/core/use-cases/revenue/remove-revenue.use-case";
+import { CreateRevenue } from "../../src/core/use-cases/revenue/create-revenue.use-case";
+import { IRevenueRepository } from "../../src/core/ports/repositories/revenue.repository";
+import { RevenueInMemoryRepository } from "../../src/adapters/secondary/repositories/in-memory/revenue.in-memory.repository";
+import InMemoryUniqueIdentifierService from "../../src/adapters/secondary/services/in-memory/unique-identifier.in-memory.service";
+import { FindRevenue } from "../../src/core/use-cases/revenue/find-revenue.use-case";
+import InMemoryDateService from "../../src/adapters/secondary/services/in-memory/date.in-memory.service";
+import { IRevenueProps } from "../../src/core/entities/revenue.entity";
+import { RemoveRevenue } from "../../src/core/use-cases/revenue/remove-revenue.use-case";
 
 describe("Revenue", () => {
   let revenueRepository: IRevenueRepository;
