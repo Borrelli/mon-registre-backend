@@ -54,7 +54,9 @@ describe("Revenue", () => {
 
       const findRevenueResponse = await new FindRevenue(revenueRepository).byId(revenueId);
 
-      expect(findRevenueResponse.uid).toEqual("uid2");
+      if (findRevenueResponse) {
+        expect(findRevenueResponse.uid).toEqual("uid2");
+      }
     });
   });
 
