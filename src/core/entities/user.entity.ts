@@ -4,13 +4,6 @@ export interface IUserProps {
   email: string;
 }
 
-export interface IUserRepoDTO {
-  uid: string;
-  firstname: string;
-  lastname: string;
-  email: string;
-}
-
 export class User {
   constructor(private _uid: string, private _creationDate: Date, private userProps: IUserProps) {}
 

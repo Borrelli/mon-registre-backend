@@ -1,10 +1,11 @@
 import mongoose, { Document, Model } from "mongoose";
-import { User } from "../../../../../core/entities/user.entity";
+import { IUserRepositoryDTO } from "../../../../../core/DTO/user.DTO";
 
-type UserSchema = Document & User;
+export type UserSchema = Document & IUserRepositoryDTO;
 
 const userSchema = new mongoose.Schema({
   uid: String,
+  creationDate: Date,
   firstname: String,
   lastname: String,
   email: String,

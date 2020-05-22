@@ -1,6 +1,6 @@
-import { IUserRepoDTO } from "../../entities/user.entity";
 import { ISharedRepository } from "./shared.repository";
+import { IUserRepositoryDTO } from "../../DTO/user.DTO";
 
-export interface IUserRepository extends ISharedRepository<IUserRepoDTO> {
+export interface IUserRepository extends ISharedRepository<IUserRepositoryDTO> {
   removeById(id: string): Promise<any>;
 }

@@ -1,7 +1,7 @@
 import mongoose, { Document, Model } from "mongoose";
 import { Revenue } from "../../../../../core/entities/revenue.entity";
 
-type RevenueSchema = Document & Revenue;
+export type RevenueSchema = Document & Revenue;
 
 const revenueSchema = new mongoose.Schema({
   uid: String,

@@ -1,12 +1,13 @@
 import { IUserRepository } from "../../../../core/ports/repositories/user.repository";
-import { User, IUserRepoDTO } from "../../../../core/entities/user.entity";
 import UserModel from "./models/user.models.real.repository";
+import { IUserRepositoryDTO } from "../../../../core/DTO/user.DTO";
+import { UserSchema } from "./models/user.models.real.repository";
 
 export class UserRealRepository implements IUserRepository {
   removeById(id: string): Promise<any> {
     return UserModel.findByIdAndDelete({ uid: id }).exec();
   }
-  create(user: IUserRepoDTO): Promise<any> {
+  create(user: IUserRepositoryDTO): Promise<UserSchema> {
     return new UserModel(user).save();
   }
 }

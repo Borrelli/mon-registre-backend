@@ -1,8 +1,9 @@
 import { IUserRepository } from "../../../../core/ports/repositories/user.repository";
 import { User } from "../../../../core/entities/user.entity";
+import { IUserRepositoryDTO } from "../../../../core/DTO/user.DTO";
 
 export class UserInMemoryRepository implements IUserRepository {
-  private userList: User[] = [
+  private userList: IUserRepositoryDTO[] = [
     new User("uid2", new Date("2000-01-02"), {
       email: "email@user.test2",
       firstname: "firstname2",
@@ -20,7 +21,7 @@ export class UserInMemoryRepository implements IUserRepository {
     }),
   ];
 
-  public create(user: User): Promise<"ok" | "ko"> {
+  public create(user: IUserRepositoryDTO): Promise<"ok" | "ko"> {
     return new Promise((resolve, reject) => {
       this.userList.push(user);
       resolve("ok");
