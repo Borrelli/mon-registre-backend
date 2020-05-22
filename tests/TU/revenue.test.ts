@@ -19,7 +19,7 @@ describe("Revenue", () => {
       revenueDate = new InMemoryDateService().generate();
     });
 
-    it("should be able to create a revenue", async () => {
+    it("should create a revenue", async () => {
       const revenue: IRevenueEntityDTO = {
         amountExcludingTax: 40,
         amountIncludingTax: 45,
@@ -41,7 +41,7 @@ describe("Revenue", () => {
       revenueRepository = new RevenueInMemoryRepository();
     });
 
-    it("should be able to find all revenues", async () => {
+    it("should find all revenues", async () => {
       const userId = "uid1";
 
       const findRevenueResponse = await new FindRevenue(revenueRepository).all(userId);
@@ -49,7 +49,7 @@ describe("Revenue", () => {
       expect(findRevenueResponse.length).toEqual(2);
     });
 
-    it("should be able to find a revenue", async () => {
+    it("should find a revenue", async () => {
       const revenueId = "uid2";
 
       const findRevenueResponse = await new FindRevenue(revenueRepository).byId(revenueId);
@@ -65,7 +65,7 @@ describe("Revenue", () => {
       revenueRepository = new RevenueInMemoryRepository();
     });
 
-    it("should be able to remove a revenue", async () => {
+    it("should remove a revenue", async () => {
       const revenueId = "uid2";
 
       const removeRevenueResponse = await new RemoveRevenue(revenueRepository).execute(revenueId);
