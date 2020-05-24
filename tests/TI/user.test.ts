@@ -6,6 +6,7 @@ import InMemoryDateService from "../../src/adapters/secondary/services/in-memory
 import { IUserEntityDTO } from "../../src/core/DTO/user.DTO";
 import { CreateUser } from "../../src/core/use-cases/user/create-user.use-case";
 import UserModel from "../../src/adapters/secondary/repositories/real/models/user.models.real.repository";
+import { CustomError } from "../../src/core/entities/custom-error.entity";
 
 const userData = [
   {
@@ -13,7 +14,7 @@ const userData = [
   },
 ];
 
-describe("User", () => {
+describe("TI User", () => {
   let userRepository: IUserRepository;
   let userId: string;
   let userDate: Date;
@@ -48,7 +49,7 @@ describe("User", () => {
         await new CreateUser(userRepository, userId, userDate).execute(user);
         fail("test failed");
       } catch (err) {
-        expect(err.message).toEqual("user exist");
+        expect(err.message).toEqual(CustomError.USER_EXIST);
       }
     });
   });

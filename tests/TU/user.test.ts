@@ -5,8 +5,9 @@ import InMemoryDateService from "../../src/adapters/secondary/services/in-memory
 import { CreateUser } from "../../src/core/use-cases/user/create-user.use-case";
 import { RemoveUser } from "../../src/core/use-cases/user/remove-user.use-case";
 import { IUserEntityDTO } from "../../src/core/DTO/user.DTO";
+import { CustomError } from "../../src/core/entities/custom-error.entity";
 
-describe("User", () => {
+describe("TU User", () => {
   let userRepository: IUserRepository;
   let userId: string;
   let userDate: Date;
@@ -20,7 +21,7 @@ describe("User", () => {
 
     it("should create a user", async () => {
       const user: IUserEntityDTO = {
-        email: "email@user.test1",
+        email: "email1@user.test",
         firstname: "firstname1",
         lastname: "lastname1",
       };
@@ -32,7 +33,7 @@ describe("User", () => {
 
     it("should return error if user email alrealy exist", async () => {
       const user: IUserEntityDTO = {
-        email: "email@user.test2",
+        email: "email2@user.test",
         firstname: "firstname1",
         lastname: "lastname1",
       };
@@ -41,7 +42,22 @@ describe("User", () => {
         await new CreateUser(userRepository, userId, userDate).execute(user);
         fail("test failed");
       } catch (err) {
-        expect(err).toEqual("ko");
+        expect(err.message).toEqual(CustomError.USER_EXIST);
+      }
+    });
+
+    it("should return error if email is not valid", async () => {
+      const user: IUserEntityDTO = {
+        email: "emailuser.test",
+        firstname: "firstname1",
+        lastname: "lastname1",
+      };
+
+      try {
+        await new CreateUser(userRepository, userId, userDate).execute(user);
+        fail("test failed");
+      } catch (err) {
+        expect(err.message).toEqual(CustomError.INVALID_EMAIL);
       }
     });
   });

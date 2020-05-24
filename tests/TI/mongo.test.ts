@@ -24,7 +24,7 @@ const mongoSchema = new mongoose.Schema({
 
 const MongoModel: Model<MongoSchema> = mongoose.model<MongoSchema>("mongos", mongoSchema);
 
-describe("Mongo", () => {
+describe("TI Mongo", () => {
   describe("Queries", () => {
     beforeEach(async () => {
       const uri = "mongodb://localhost:27017/mon-registre-test";

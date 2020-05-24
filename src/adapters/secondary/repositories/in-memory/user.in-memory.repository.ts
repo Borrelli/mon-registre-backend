@@ -1,21 +1,22 @@
 import { IUserRepository } from "../../../../core/ports/repositories/user.repository";
 import { User } from "../../../../core/entities/user.entity";
 import { IUserRepositoryDTO } from "../../../../core/DTO/user.DTO";
+import { CustomError } from "../../../../core/entities/custom-error.entity";
 
 export class UserInMemoryRepository implements IUserRepository {
   private userList: IUserRepositoryDTO[] = [
     new User("uid2", new Date("2000-01-02"), {
-      email: "email@user.test2",
+      email: "email2@user.test",
       firstname: "firstname2",
       lastname: "lastname2",
     }),
     new User("uid3", new Date("2000-01-03"), {
-      email: "email@user.test3",
+      email: "email3@user.test",
       firstname: "firstname3",
       lastname: "lastname3",
     }),
     new User("uid4", new Date("2000-01-04"), {
-      email: "email@user.test4",
+      email: "email4@user.test",
       firstname: "firstname4",
       lastname: "lastname4",
     }),
@@ -43,7 +44,7 @@ export class UserInMemoryRepository implements IUserRepository {
     return new Promise((resolve, reject) => {
       const foundedUser = this.userList.find((user) => user.email === email);
       if (foundedUser) {
-        return reject("ko");
+        return reject(new Error(CustomError.USER_EXIST));
       }
       return resolve();
     });

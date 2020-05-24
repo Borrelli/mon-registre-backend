@@ -7,7 +7,7 @@ import InMemoryDateService from "../../src/adapters/secondary/services/in-memory
 import { RemoveRevenue } from "../../src/core/use-cases/revenue/remove-revenue.use-case";
 import { IRevenueEntityDTO } from "../../src/core/DTO/revenue.DTO";
 
-describe("Revenue", () => {
+describe("TU Revenue", () => {
   let revenueRepository: IRevenueRepository;
   let revenueId: string;
   let revenueDate: Date;
