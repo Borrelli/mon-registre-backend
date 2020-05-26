@@ -9,16 +9,19 @@ export class UserInMemoryRepository implements IUserRepository {
       email: "email2@user.test",
       firstname: "firstname2",
       lastname: "lastname2",
+      password: "password",
     }),
     new User("uid3", new Date("2000-01-03"), {
       email: "email3@user.test",
       firstname: "firstname3",
       lastname: "lastname3",
+      password: "password",
     }),
     new User("uid4", new Date("2000-01-04"), {
       email: "email4@user.test",
       firstname: "firstname4",
       lastname: "lastname4",
+      password: "password",
     }),
   ];
 

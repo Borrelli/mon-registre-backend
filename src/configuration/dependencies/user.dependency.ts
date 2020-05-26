@@ -3,15 +3,16 @@ import RealDateService from "../../adapters/secondary/services/real/date.real.se
 import { UserRealRepository } from "../../adapters/secondary/repositories/real/user.real.repository";
 import { CreateUser } from "../../core/use-cases/user/create-user.use-case";
 import RealTokenService from "../../adapters/secondary/services/real/token.real.service";
+import RealPasswordHashingService from "../../adapters/secondary/services/real/password-hashing.real.service";
 
 class UserDependency {
-  private id = new RealUniqueIdentifierService().generate();
-  private creationDate = new RealDateService().generate();
+  private uniqueIdentifierService = new RealUniqueIdentifierService();
+  private dateService = new RealDateService();
   private repository = new UserRealRepository();
-  private tokenService = new RealTokenService();
+  private passwordHashingService = new RealPasswordHashingService();
 
   public create() {
-    return new CreateUser(this.repository, this.id, this.creationDate);
+    return new CreateUser(this.repository, this.uniqueIdentifierService, this.dateService, this.passwordHashingService);
   }
 }
 

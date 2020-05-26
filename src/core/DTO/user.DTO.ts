@@ -10,4 +10,5 @@ export interface IUserEntityDTO {
   firstname: string;
   lastname: string;
   email: string;
+  password: string;
 }

@@ -6,17 +6,23 @@ import { CreateUser } from "../../src/core/use-cases/user/create-user.use-case";
 import { RemoveUser } from "../../src/core/use-cases/user/remove-user.use-case";
 import { IUserEntityDTO } from "../../src/core/DTO/user.DTO";
 import { CustomError } from "../../src/core/entities/custom-error.entity";
+import IPasswordHashingService from "../../src/core/ports/services/password-hashing.service";
+import InMemoryPasswordHashingService from "../../src/adapters/secondary/services/in-memory/in-memory.password-hashing.service";
+import { IUniqueIdentifierService } from "../../src/core/ports/services/unique-identifier.service";
+import { IDateService } from "../../src/core/ports/services/date.service";
 
 describe("TU User", () => {
   let userRepository: IUserRepository;
-  let userId: string;
-  let userDate: Date;
+  let userId: IUniqueIdentifierService;
+  let userDate: IDateService;
+  let passwordHashingService: IPasswordHashingService;
 
   describe("Create", () => {
     beforeEach(() => {
       userRepository = new UserInMemoryRepository();
-      userId = new InMemoryUniqueIdentifierService().generate();
-      userDate = new InMemoryDateService().generate();
+      userId = new InMemoryUniqueIdentifierService();
+      userDate = new InMemoryDateService();
+      passwordHashingService = new InMemoryPasswordHashingService();
     });
 
     it("should create a user", async () => {
@@ -24,9 +30,12 @@ describe("TU User", () => {
         email: "email1@user.test",
         firstname: "firstname1",
         lastname: "lastname1",
+        password: "password",
       };
 
-      const createUserResponse = await new CreateUser(userRepository, userId, userDate).execute(user);
+      const createUserResponse = await new CreateUser(userRepository, userId, userDate, passwordHashingService).execute(
+        user
+      );
 
       expect(createUserResponse).toEqual("ok");
     });
@@ -36,10 +45,11 @@ describe("TU User", () => {
         email: "email2@user.test",
         firstname: "firstname1",
         lastname: "lastname1",
+        password: "password",
       };
 
       try {
-        await new CreateUser(userRepository, userId, userDate).execute(user);
+        await new CreateUser(userRepository, userId, userDate, passwordHashingService).execute(user);
         fail("test failed");
       } catch (err) {
         expect(err.message).toEqual(CustomError.USER_EXIST);
@@ -51,10 +61,11 @@ describe("TU User", () => {
         email: "emailuser.test",
         firstname: "firstname1",
         lastname: "lastname1",
+        password: "password",
       };
 
       try {
-        await new CreateUser(userRepository, userId, userDate).execute(user);
+        await new CreateUser(userRepository, userId, userDate, passwordHashingService).execute(user);
         fail("test failed");
       } catch (err) {
         expect(err.message).toEqual(CustomError.INVALID_EMAIL);

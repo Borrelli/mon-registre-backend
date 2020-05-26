@@ -17,11 +17,7 @@ export default class RealTokenService implements ITokenService {
   public valide(authorization: string | undefined): ITokenResponse {
     if (authorization) {
       try {
-        const formatedAuthorization = authorization.split(" ");
-        if (formatedAuthorization[0] !== "Bearer") {
-          throw new Error(CustomError.INVALID_TOKEN);
-        }
-        return jwt.verify(formatedAuthorization[1], tokenConfiguration.JWT_SECRET) as ITokenResponse;
+        return jwt.verify(authorization, tokenConfiguration.JWT_SECRET) as ITokenResponse;
       } catch (err) {
         return err;
       }

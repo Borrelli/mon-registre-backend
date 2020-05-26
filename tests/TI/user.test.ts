@@ -7,6 +7,10 @@ import { IUserEntityDTO } from "../../src/core/DTO/user.DTO";
 import { CreateUser } from "../../src/core/use-cases/user/create-user.use-case";
 import UserModel from "../../src/adapters/secondary/repositories/real/models/user.models.real.repository";
 import { CustomError } from "../../src/core/entities/custom-error.entity";
+import IPasswordHashingService from "../../src/core/ports/services/password-hashing.service";
+import InMemoryPasswordHashingService from "../../src/adapters/secondary/services/in-memory/in-memory.password-hashing.service";
+import { IUniqueIdentifierService } from "../../src/core/ports/services/unique-identifier.service";
+import { IDateService } from "../../src/core/ports/services/date.service";
 
 const userData = [
   {
@@ -16,8 +20,9 @@ const userData = [
 
 describe("TI User", () => {
   let userRepository: IUserRepository;
-  let userId: string;
-  let userDate: Date;
+  let userId: IUniqueIdentifierService;
+  let userDate: IDateService;
+  let passwordHashingService: IPasswordHashingService;
 
   describe("Create", () => {
     beforeEach(async () => {
@@ -28,8 +33,9 @@ describe("TI User", () => {
         useUnifiedTopology: true,
       });
       userRepository = new UserRealRepository();
-      userId = new InMemoryUniqueIdentifierService().generate();
-      userDate = new InMemoryDateService().generate();
+      userId = new InMemoryUniqueIdentifierService();
+      userDate = new InMemoryDateService();
+      passwordHashingService = new InMemoryPasswordHashingService();
       await UserModel.remove({}).exec();
       await UserModel.insertMany(userData);
     });
@@ -43,10 +49,11 @@ describe("TI User", () => {
         email: "email@user.test",
         firstname: "firstname1",
         lastname: "lastname1",
+        password: "password",
       };
 
       try {
-        await new CreateUser(userRepository, userId, userDate).execute(user);
+        await new CreateUser(userRepository, userId, userDate, passwordHashingService).execute(user);
         fail("test failed");
       } catch (err) {
         expect(err.message).toEqual(CustomError.USER_EXIST);
