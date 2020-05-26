@@ -1,3 +1,3 @@
-export default interface IDateService {
+export interface IDateService {
   generate(): Date;
 }

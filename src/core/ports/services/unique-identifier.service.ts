@@ -1,3 +1,3 @@
-export default interface IUniqueIdentifierService {
+export interface IUniqueIdentifierService {
   generate(): string;
 }

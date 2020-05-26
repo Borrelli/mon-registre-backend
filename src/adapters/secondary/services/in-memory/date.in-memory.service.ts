@@ -1,4 +1,4 @@
-import IDateService from "../../../../core/ports/services/date.service";
+import { IDateService } from "../../../../core/ports/services/date.service";
 
 export default class InMemoryDateService implements IDateService {
   private date: Date = new Date();

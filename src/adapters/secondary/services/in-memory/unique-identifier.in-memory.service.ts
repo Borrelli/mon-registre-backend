@@ -1,4 +1,4 @@
-import IUniqueIdentifierService from "../../../../core/ports/services/unique-identifier.service";
+import { IUniqueIdentifierService } from "../../../../core/ports/services/unique-identifier.service";
 
 export default class InMemoryUniqueIdentifierService implements IUniqueIdentifierService {
   private count: number = 0;
