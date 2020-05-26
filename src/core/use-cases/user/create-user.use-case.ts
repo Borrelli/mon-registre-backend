@@ -9,14 +9,14 @@ import { IDateService } from "../../ports/services/date.service";
 export class CreateUser {
   constructor(
     private repository: IUserRepository,
-    private userId: IUniqueIdentifierService,
-    private userDate: IDateService,
+    private uniqueIdentifierService: IUniqueIdentifierService,
+    private dateService: IDateService,
     private passwordHashingService: IPasswordHashingService
   ) {}
 
   public async execute(userProps: IUserEntityDTO) {
     userProps.password = this.passwordHashingService.hash(userProps.password);
-    const user = new User(this.userId.generate(), this.userDate.generate(), userProps);
+    const user = new User(this.uniqueIdentifierService.generate(), this.dateService.generate(), userProps);
     await this.repository.exist(user.email);
     return this.repository.create(UserMapper.toRepository(user));
   }

@@ -5,22 +5,24 @@ import InMemoryUniqueIdentifierService from "../../src/adapters/secondary/servic
 import { FindRevenue } from "../../src/core/use-cases/revenue/find-revenue.use-case";
 import InMemoryDateService from "../../src/adapters/secondary/services/in-memory/date.in-memory.service";
 import { RemoveRevenue } from "../../src/core/use-cases/revenue/remove-revenue.use-case";
-import { IRevenueEntityDTO } from "../../src/core/DTO/revenue.DTO";
+import { IRevenueDTO } from "../../src/core/DTO/revenue.DTO";
+import { IUniqueIdentifierService } from "../../src/core/ports/services/unique-identifier.service";
+import { IDateService } from "../../src/core/ports/services/date.service";
 
 describe("TU Revenue", () => {
   let revenueRepository: IRevenueRepository;
-  let revenueId: string;
-  let revenueDate: Date;
+  let revenueId: IUniqueIdentifierService;
+  let revenueDate: IDateService;
 
   describe("Create", () => {
     beforeEach(() => {
       revenueRepository = new RevenueInMemoryRepository();
-      revenueId = new InMemoryUniqueIdentifierService().generate();
-      revenueDate = new InMemoryDateService().generate();
+      revenueId = new InMemoryUniqueIdentifierService();
+      revenueDate = new InMemoryDateService();
     });
 
     it("should create a revenue", async () => {
-      const revenue: IRevenueEntityDTO = {
+      const revenue: IRevenueDTO = {
         amountExcludingTax: 40,
         amountIncludingTax: 45,
         amountVAT: 5,
@@ -30,7 +32,10 @@ describe("TU Revenue", () => {
         reference: "paiement-ref1",
       };
 
-      const createRevenueResponse = await new CreateRevenue(revenueRepository, revenueId, revenueDate).execute(revenue);
+      const createRevenueResponse = await new CreateRevenue(revenueRepository, revenueId, revenueDate).execute(
+        revenue,
+        "user-id1"
+      );
 
       expect(createRevenueResponse).toEqual("ok");
     });

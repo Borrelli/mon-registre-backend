@@ -5,6 +5,7 @@ import RevenueDependency from "../../../configuration/dependencies/revenue.depen
 
 const revenueRoute = express.Router();
 
+revenueRoute.post(RoutesEndpoint.CREATE, [new RevenueController(new RevenueDependency()).create]);
 revenueRoute.get(RoutesEndpoint.FIND_ALL, [new RevenueController(new RevenueDependency()).findAll]);
 
 export default revenueRoute;

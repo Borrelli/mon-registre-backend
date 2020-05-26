@@ -10,7 +10,7 @@ export interface IRevenueRepositoryDTO {
   paiementMethod: string;
 }
 
-export interface IRevenueEntityDTO {
+export interface IRevenueDTO {
   reference: string;
   customerName: string;
   userId: string;

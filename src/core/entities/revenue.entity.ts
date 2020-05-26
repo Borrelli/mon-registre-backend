@@ -1,7 +1,7 @@
-import { IRevenueEntityDTO } from "../DTO/revenue.DTO";
+import { IRevenueDTO } from "../DTO/revenue.DTO";
 
 export class Revenue {
-  constructor(private _uid: string, private _creationDate: Date, private _revenueProps: IRevenueEntityDTO) {}
+  constructor(private _uid: string, private _creationDate: Date, private _revenueProps: IRevenueDTO) {}
 
   get uid() {
     return this._uid;
