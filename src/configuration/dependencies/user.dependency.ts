@@ -3,7 +3,7 @@ import RealDateService from "../../adapters/secondary/services/real/date.real.se
 import { UserRealRepository } from "../../adapters/secondary/repositories/real/user.real.repository";
 import { CreateUser } from "../../core/use-cases/user/create-user.use-case";
 
-class UserDependencies {
+class UserDependency {
   private id = new RealUniqueIdentifierService().generate();
   private creationDate = new RealDateService().generate();
   private repository = new UserRealRepository();
@@ -13,4 +13,4 @@ class UserDependencies {
   }
 }
 
-export default UserDependencies;
+export default UserDependency;

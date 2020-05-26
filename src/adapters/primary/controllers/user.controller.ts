@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import UserDependencies from "../../../configuration/dependencies/user.dependency";
+import UserDependency from "../../../configuration/dependencies/user.dependency";
 
 export default class UserController {
-  constructor(private dependencies: UserDependencies) {}
+  constructor(private dependencies: UserDependency) {}
 
   public create = async (request: Request, response: Response) => {
     const { firstname, lastname, email } = request.body;
