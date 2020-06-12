@@ -1,4 +1,5 @@
 export enum RoutesEndpoint {
+  AUTH = "/AUTH",
   CREATE = "/create",
   FIND_ALL = "/find-all",
 }

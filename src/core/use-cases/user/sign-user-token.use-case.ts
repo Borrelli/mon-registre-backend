@@ -3,7 +3,11 @@ import { ITokenService } from "../../ports/services/token.service";
 export class SignUserToken {
   constructor(private tokenService: ITokenService) {}
 
-  public execute(uid: string) {
-    return this.tokenService.sign({ uid });
+  public accessToken(uid: string) {
+    return this.tokenService.signAccessToken({ uid });
+  }
+
+  public refreshToken(uid: string) {
+    return this.tokenService.signRefreshToken({ uid });
   }
 }

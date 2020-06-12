@@ -1,6 +1,9 @@
-import { ITokenResponse } from "../../../adapters/secondary/services/real/token.real.service";
+import { ITokenPayload } from "../../../adapters/secondary/services/real/token.real.service";
+import { Token } from "../../entities/token.entity";
 
 export interface ITokenService {
-  sign(data: ITokenResponse): string;
-  valide(authorization: string | undefined): ITokenResponse;
+  signAccessToken(payload: ITokenPayload): Token;
+  signRefreshToken(payload: ITokenPayload): Token;
+  valideAccessToken(authorization: string | undefined): ITokenPayload;
+  valideRefreshToken(authorization: string | undefined): ITokenPayload;
 }
